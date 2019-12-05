@@ -2,11 +2,11 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <h3>Choose Your option to start playing</h3>
-    <form @submit.prevent="checkForm">
+    <form @submit.prevent="playGame">
       <radio-button
-        v-for="(option, index) in options"
+        v-for="(choice, index) in choices"
         :key="index"
-        :value="option"
+        :value="choice"
         required
         name="choice"
       />
@@ -15,7 +15,10 @@
         text="Play!"
       />
     </form>
-    <result/>
+    <result
+      v-if="showResult"
+      :result="isUserWinner"
+    />
   </div>
 </template>
 
@@ -34,8 +37,35 @@ export default {
   },
   data() {
     return {
-      options: ['rock', 'paper', 'scissors'],
+      choices: ['rock', 'paper', 'scissors'],
+      computerChoice: '',
+      userChoice: '',
+      isUserWinner: false,
+      showResult: false,
     };
+  },
+  methods: {
+    playGame() {
+      this.computerChoice = this.choices[Math.floor(Math.random() * this.choices.length)];
+      this.userChoice = document.querySelector('.radio:checked').value;
+      console.log(this.userChoice, this.computerChoice, this.isUserWinner);
+      this.checkWinner();
+      this.showResult = !this.showResult;
+    },
+    checkWinner() {
+      if (this.userChoice === 'rock' && this.computerChoice === 'scissor') {
+        this.isUserWinner = true;
+      } else if (this.userChoice === 'paper' && this.computerChoice === 'rock') {
+        this.isUserWinner = true;
+      } else if (this.userChoice === 'scissors' && this.computerChoice === 'paper') {
+        this.isUserWinner = true;
+      } else if (this.userChoice === this.computerChoice) {
+        this.isUserWinner = false;
+      } else {
+        this.isUserWinner = false;
+      }
+      return this.isUserWinner;
+    },
   },
 };
 </script>

@@ -1,13 +1,13 @@
 <template>
   <div class="results">
     <p
-      v-if="result === 'winner'"
+      v-if="result"
       class="winner"
     >
       You won!
     </p>
     <p
-      v-else-if="result === 'looser'"
+      v-else
       class="looser"
     >
       You Lost!
@@ -20,8 +20,8 @@ export default {
   name: 'Result',
   props: {
     result: {
-      type: String,
-      default: '',
+      type: Boolean,
+      default: false,
     },
   },
 };
