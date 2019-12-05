@@ -1,18 +1,41 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h3>Choose Your option to start playing</h3>
+    <form @submit.prevent="checkForm">
+      <radio-button
+        v-for="(option, index) in options"
+        :key="index"
+        :value="option"
+        required
+        name="choice"
+      />
+      <the-button
+        type="submit"
+        text="Play!"
+      />
+    </form>
+    <result/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import RadioButton from '@/components/RadioButton.vue';
+import TheButton from '@/components/TheButton.vue';
+import Result from '@/components/Result.vue';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
+    RadioButton,
+    TheButton,
+    Result,
+  },
+  data() {
+    return {
+      options: ['rock', 'paper', 'scissors'],
+    };
   },
 };
 </script>
