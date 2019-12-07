@@ -24,6 +24,7 @@
 
 <script>
 // @ is an alias to /src
+import { mapGetters, mapActions } from 'vuex';
 import RadioButton from '@/components/RadioButton.vue';
 import TheButton from '@/components/TheButton.vue';
 import Result from '@/components/Result.vue';
@@ -36,20 +37,29 @@ export default {
     Result,
   },
   computed: {
-    choices() {
-      return this.$store.state.choices;
-    },
-    showResult() {
-      return this.$store.state.showResult;
-    },
-    isUserWinner() {
-      return this.$store.state.isUserWinner;
-    },
+    ...mapGetters([
+      'choices',
+      'showResult',
+      'isUserWinner',
+    ]),
+    // choices() {
+    //   return this.$store.getters.choices;
+    // },
+    // showResult() {
+    //   return this.$store.getters.showResult;
+    // },
+    // isUserWinner() {
+    //   return this.$store.getters.isUserWinner;
+    // },
   },
   methods: {
+    ...mapActions([
+      'playGame',
+    ]),
     sendUserSelection() {
       const userSelection = this.$el.querySelector('.radio:checked').value;
-      this.$store.dispatch('playGame', userSelection);
+      // this.$store.dispatch('playGame', userSelection);
+      this.playGame(userSelection);
     },
   },
 };
