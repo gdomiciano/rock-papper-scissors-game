@@ -1,7 +1,7 @@
 # rock-papper-scisors-game
 Little game project with the goal to create a user vs computer game
 
-Copy this file as a start point for your logic: (https://github.com/gdomiciano/rock-papper-scissors-game/blob/start-point/game.js)
+Copy this file as a start point for your logic: https://github.com/gdomiciano/rock-papper-scissors-game/blob/start-point/game.js
 
 Create an `index.html` that allows the user to choose an option among rock, paper and scissors and a button to play against the computer.
 
